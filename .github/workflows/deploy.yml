@@ -1,0 +1,24 @@
+name: "Deployment"
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: "actions/checkout@v4"
+        with:
+          ref: "main"
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+      - name: Install Bunlder
+        run: gem install bundler
+      - uses: webfactory/ssh-agent@v0.8.0
+        with:
+            ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: "bundle"
+        run: bundle install
+      - name: "deploy"
+        run: bundle exec cap production deploy
