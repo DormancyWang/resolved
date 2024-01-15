@@ -5,7 +5,6 @@ ruby "3.2.2"
 
 gem "puma", "~> 6.3"
 gem "rack", "~> 3.0"
-gem "puma-daemon", "~> 0.3.2"
 
 group :development do
   gem "rake", "~> 13.0"
